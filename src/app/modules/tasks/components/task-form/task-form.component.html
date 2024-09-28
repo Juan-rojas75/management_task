@@ -1,0 +1,46 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+  <div class="flex justify-between mb-4">
+    <h2 class="text-2xl font-bold">Crear Tarea</h2>
+    <app-close-button (response)="closeAddtask()"></app-close-button>
+  </div>
+
+  <div class="mb-4">
+    <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
+    <input id="title" formControlName="title" class="mt-1 block w-full border  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+    <div *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="text-red-600 text-sm">
+      <small *ngIf="taskForm.get('title')?.errors?.['required']">El título es requerido.</small>
+      <small *ngIf="taskForm.get('title')?.errors?.['minlength']">El título debe tener al menos 3 caracteres.</small>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
+    <textarea id="description" formControlName="description" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+    <div *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched" class="text-red-600 text-sm">
+      <small *ngIf="taskForm.get('description')?.errors?.['required']">La descripción es requerida.</small>
+      <small *ngIf="taskForm.get('description')?.errors?.['minlength']">La descripción debe tener al menos 5 caracteres.</small>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="dateEnd" class="block text-sm font-medium text-gray-700">Fecha de Finalización</label>
+    <input id="dateEnd" type="date" formControlName="dateEnd" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+    <div *ngIf="taskForm.get('dateEnd')?.invalid && taskForm.get('dateEnd')?.touched" class="text-red-600 text-sm">
+      <small *ngIf="taskForm.get('dateEnd')?.errors?.['required']">La fecha de finalización es requerida.</small>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="userId" class="block text-sm font-medium text-gray-700">Asignar Usuarios</label>
+    <select id="userId" formControlName="userId" multiple class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+      <option *ngFor="let user of users" [value]="user.id">{{ user.fullName }} ({{ user.age }})</option>
+    </select>
+    <div *ngIf="taskForm.get('userId')?.invalid && taskForm.get('userId')?.touched" class="text-red-600 text-sm">
+      <small *ngIf="taskForm.get('userId')?.errors?.['required']">Al menos un usuario es requerido.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="taskForm.invalid" class="w-full py-2 px-4 bg-indigo-600 text-white font-bold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" >
+    Guardar Tarea
+  </button>
+</form>

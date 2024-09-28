@@ -1,0 +1,34 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-4">Agregar Usuario</h2>
+
+  <div class="mb-4">
+    <label for="fullName" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+    <input id="fullName" formControlName="fullName" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+    <div *ngIf="userForm.get('fullName')?.invalid && userForm.get('fullName')?.touched" class="text-red-500 text-sm">
+      <small *ngIf="userForm.get('fullName')?.errors?.['required']">El nombre completo es requerido.</small>
+      <small *ngIf="userForm.get('fullName')?.errors?.['minlength']">Debe tener una longitud mínima de 5 caracteres.</small>
+    </div>
+</div>
+
+  <div class="mb-4">
+    <label for="age" class="block text-sm font-medium text-gray-700">Edad</label>
+    <input id="age" type="number" formControlName="age" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+    <div *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched" class="text-red-500 text-sm">
+      <small *ngIf="userForm.get('age')?.errors?.['required']">La edad es requerida.</small>
+      <small *ngIf="userForm.get('age')?.errors?.['min']">La edad debe ser mayor a 18.</small>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="skills" class="block text-sm font-medium text-gray-700">Habilidades</label>
+    <select id="skills" formControlName="skills" multiple class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+      <option *ngFor="let skill of skillsArray" [ngValue]="skill">{{ skill.name }}</option>
+    </select>
+    <div *ngIf="userForm.get('skills')?.invalid && userForm.get('skills')?.touched" class="text-red-600 text-sm">
+      <small *ngIf="userForm.get('skills')?.errors?.['required']">Al menos una habilidad es requerida.</small>
+    </div>
+  </div>
+
+
+  <button type="submit" [disabled]="userForm.invalid" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-200">Agregar Usuario</button>
+</form>

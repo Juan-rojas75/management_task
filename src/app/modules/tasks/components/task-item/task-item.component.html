@@ -1,0 +1,27 @@
+<section
+  [ngClass]="item.completed ? 'bg-green-400' : 'bg-indigo-300'"
+  class="flex flex-col gap-4 justify-between items-center rounded-xl border-2 border-gray-800 mx-2 px-4 py-4 w-96"
+>
+  <div class="flex flex-row w-full justify-between items-center">
+    <h1 class="font-bold text-lg truncate">{{ item.title }}</h1>
+    <button (click)="navigateToEdit(item.id)" class="hover:text-blue-600">
+      <span class="text-sm">Ver mas</span>
+    </button>
+  </div>
+
+  <div class="flex flex-row w-full justify-between items-center">
+    <span
+      [ngClass]="item.completed ? 'bg-green-600 text-white' : 'bg-gray-400 text-white'"
+      class="px-2 py-1 rounded-xl font-semibold border border-gray-800"
+    >
+      {{ item.completed ? 'Completed' : 'Pending' }}
+    </span>
+  </div>
+
+  <div class="flex flex-row w-full justify-between items-center">
+    <div class="flex flex-row items-center gap-2">
+      <span class="material-symbols-outlined">calendar_month</span>
+      <span class="text-sm">{{ item.dateEnd | date }}</span>
+    </div>
+  </div>
+</section>

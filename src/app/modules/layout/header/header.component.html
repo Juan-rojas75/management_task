@@ -1,0 +1,21 @@
+<nav class="flex flex-col justify-center items-center gap-4 px-10 py-4 border-b border-gray-200">
+  <div class="flex flex-row justify-between w-full">
+    <h1 class="font-bold text-2xl">Task list</h1>
+    <button (click)="this.menu = !this.menu" class="flex flex-row items-center relative">
+      <span class="material-symbols-outlined rounded-lg hover:bg-gray-100 p-2 transition duration-200">
+        menu
+      </span>
+    </button>
+  </div>
+</nav>
+
+<div *ngIf="menu" class="absolute z-500 border border-gray-300 top-16 right-10 rounded-lg bg-white shadow-lg w-48 p-3 transition duration-200">
+  <ul class="flex flex-col gap-2">
+    <li [routerLink]="['/home/users']" class="hover:bg-gray-200 w-full rounded-md p-2 transition duration-200 cursor-pointer">
+      Users
+    </li>
+    <li [routerLink]="['/home/tasks']" class="hover:bg-gray-200 w-full rounded-md p-2 transition duration-200 cursor-pointer">
+        Tasks
+    </li>
+  </ul>
+</div>

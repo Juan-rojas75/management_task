@@ -1,0 +1,65 @@
+
+<div class="flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-lg p-6 bg-white rounded-lg shadow-md">
+    <div class="flex justify-between mb-4">
+      <h1 class="text-2xl font-bold mb-4 text-center">Detalles de la Tarea</h1>
+      <app-close-button (response)="closeTaskDetail()"></app-close-button>
+    </div>
+
+    <div class="mb-4">
+      <span class="font-semibold">Titulo:</span>
+      <p class="text-gray-700">{{ task.title }}</p>
+    </div>
+
+    <div class="mb-4 flex justify-between gap-5">
+      <div>
+        <span class="font-semibold">ID de la tarea:</span>
+        <p class="text-gray-700">{{ taskId }}</p>
+      </div>
+      <div class="mb-4">
+        <span class="font-semibold">Fecha de finalización:</span>
+        <p class="text-gray-700">{{ task.dateEnd | date }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="task.description" class="mb-4">
+      <span class="font-semibold">Descripción:</span>
+      <p class="text-gray-700">{{ task.description }}</p>
+    </div>
+
+    <div class="mb-4">
+      <span class="font-semibold">Estado:</span>
+      <p class="text-gray-700">{{ task.completed ? 'Completada' : 'Pendiente' }}</p>
+    </div>
+
+    <h2 class="text-xl font-bold mt-6 mb-2 text-center">Información del Usuario</h2>
+
+    <ng-container *ngFor="let userx of user" >
+      <div class=" border border-gray-300 rounded-lg p-2 ">
+        <div class="mb-2 flex justify-between gap-5">
+          <div class="mb-4">
+            <span class="font-semibold">Nombre:</span>
+            <p class="text-gray-700">{{ userx.fullName }}</p>
+          </div>
+          <div class="mb-4">
+            <span class="font-semibold">Edad:</span>
+            <p class="text-gray-700">{{ userx.age }}</p>
+          </div>
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold">Habilidades:</span>
+          <span *ngFor="let skill of userx.skills; let last = last">
+            {{ skill.name }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+      </div>
+
+    </ng-container>
+
+    <div>
+      <button (click)="completedTask(task)" type="submit" [disabled]="task.completed" class="w-full py-2 px-4 bg-indigo-600 text-white font-bold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" >
+        Completar tarea
+      </button>
+    </div>
+  </div>
+</div>

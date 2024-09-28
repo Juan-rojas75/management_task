@@ -1,0 +1,8 @@
+<button (click)="toggleSelection()" [ngClass]="{
+  'bg-black text-white': isSelected,
+  'bg-white text-black': !isSelected,
+  'border-gray-200': true,
+  'hover:bg-black hover:text-white': !isSelected
+}" class="flex flex-row px-4 py-2 rounded-xl border-2 transition-all duration-300">
+{{ objeto.title }}
+</button>
